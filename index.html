@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Score Keeper Board</title>
+</head>
+
+<body>
+    <div class="navcontainer" id="navcontainer">
+        <h1 class="navlogo" id="navlogo"><span class="one">S</span><span class="headfon">cor</span><span
+                class="five">E</span><span class="headfon">y.com</span>
+    </div>
+    <div class="container" id="container">
+        <div class="content" id="content">
+            <p class="numcontainer" id="numcontainer"><span class="num1" id="num1">0</span> - <span class="num2"
+                    id="num2">0</span></p>
+            <h1 class="ScorEy" id="ScorEy"><span class="one">S</span>cor<span class="five">E</span>y Score Keeper Board
+            </h1>
+
+            <p class="information" id="information"> First Please Select Winning Point Below</p>
+            <span class="playto" id="playto"> <b class="bold" id="bold">Play to</b>
+                <select class="select" id="select">
+                    <option value="--">--</option>
+                    <option value="2">2 to Win</option>
+                    <option value="3">3 to Win</option>
+                    <option value="4">4 to Win</option>
+                    <option value="5">5 to Win</option>
+                    <option value="6">6 to Win</option>
+                    <option value="7">7 to Win</option>
+                    <option value="8">8 to Win</option>
+                    <option value="9">9 to Win</option>
+                    <option value="10">10 to Win</option>
+                    <option value="11">11 to Win</option>
+                    <option value="12">12 to Win</option>
+                </select>
+            </span>
+        </div>
+        <div class="buttons" id="buttons">
+            <button class="player1" id="player1">+1 Player One</button>
+            <button class="player2" id="player2">+2 Player Two</button>
+            <button class="reset" id="reset">Reset</button>
+        </div>
+    </div>
+    <script src="https://drive.google.com/file/d/1cmwYEDJq47Z9WFhvFBUSZteFjNgnYsFH/view?usp=drive_link"></script>
+    <script>
+        let nav = document.querySelector("#navcontainer");
+        nav.style.display = "flex";
+        nav.style.flexDirection = "row";
+        nav.style.justifyContent = "center";
+        let logo = document.querySelector("#navlogo");
+        logo.style.alignSelf = "center";
+        logo.style.fontSize = "60px";
+        logo.style.padding = "1%";
+        let container = document.querySelector("#container");
+        container.style.display = "flex";
+        container.style.flexWrap = "wrap";
+        container.style.backgroundColor = "#fff";
+        container.style.width = "550px";
+        container.style.height = "600px"
+        container.style.justifyContent = "center";
+        container.style.justifyContent = 'space-evenly'
+        container.style.textAlign = "center";
+        container.style.boxShadow = "rgba(0, 0, 0, 0.35) 0px 5px 15px,rgba(0, 0, 0, 0.35) 0px 5px 15px,rgba(0, 0, 0, 0.35) 0px 5px 15px";
+
+        const reset = document.querySelector("#reset");
+        const player1 = document.querySelector("#player1");
+        const player2 = document.querySelector("#player2");
+        let num1 = document.querySelector("#num1");
+        let num2 = document.querySelector("#num2");
+        let select = document.querySelector("#select");
+        let resetscore = 0;
+        let winningscore = 0;
+        let p1score = 0;
+        let p2score = 0;
+        let gameOver = false;
+        player1.addEventListener('click', function () {
+            if (!gameOver) {
+                p1score += 1;
+                num1.textContent = p1score;
+            }
+            if (p1score === winningscore) {
+                gameOver = true;
+                num1.classList.add("winner");
+                num2.classList.add("loser");
+                player1.setAttribute('disabled');
+                player2.setAttribute('disabled');
+            }
+        });
+        player2.addEventListener('click', function () {
+            if (!gameOver) {
+                p2score += 1;
+                num2.textContent = p2score;
+            }
+            if (p2score === winningscore) {
+                gameOver = true;
+                num2.classList.add("winner");
+                num1.classList.add("loser");
+                player1.setAttribute('disabled');
+                player2.setAttribute('disabled');
+            }
+        });
+        select.addEventListener('change', function () {
+            winningscore = parseInt(this.value);
+            resetting();
+        })
+
+
+        reset.addEventListener('click', resetting)
+
+        function resetting() {
+            gameOver = false;
+            p1score = 0;
+            p2score = 0;
+            num1.textContent = 0;
+            num2.textContent = 0;
+            num1.classList.remove('winner', 'loser');
+            num2.classList.remove('winner', 'loser');
+            player1.removeAttribute('disabled');
+            player2.removeAttribute('disabled');
+        };
+
+    </script>
+</body>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #e6f0f5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .navcontainer {
+        background: #0a1016;
+        width: 100%;
+        font-size: 80px;
+    }
+
+    .one {
+        color: #ef476f;
+
+    }
+
+    .headfon {
+        color: #ffffff;
+
+    }
+
+    .five {
+        color: #00f2f2;
+    }
+
+    .container {
+        margin-top: 15px;
+        position: relative;
+    }
+
+    #ScorEy {
+        margin-top: 50px;
+        font-size: 35px;
+    }
+
+
+    h1 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 1000;
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+        color: #003049;
+    }
+
+    .numcontainer {
+        font-size: 150px;
+        padding: 0;
+        margin: 0;
+        margin-bottom: -30px;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px;
+        margin-top: 8px;
+
+    }
+
+    .information {
+        margin-top: 50px;
+        font-size: 20px;
+        color: red;
+        letter-spacing: 3px;
+        font-weight: 1000;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .playto {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 40px;
+        letter-spacing: 3px;
+    }
+
+    .select {
+        font-size: 35px;
+        text-align: center;
+        color: black;
+        font-family: monospace;
+    }
+
+    .select option {
+        scroll-behavior: smooth;
+    }
+
+
+    button {
+
+        font-size: 20px;
+        width: 170px;
+        height: 50px;
+        text-transform: uppercase;
+        margin-left: 5px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 700;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+    }
+
+    .player1 {
+
+        background-color: rgb(231, 68, 214);
+        color: rgb(255, 255, 255);
+        border-radius: 15px;
+        border-color: rgb(231, 68, 214);
+        transition: 0.3s ease-in;
+    }
+
+    #player1:hover {
+        background-color: rgb(240, 225, 238);
+        color: #212529;
+    }
+
+    .player2 {
+        background-color: rgb(153, 71, 230);
+        color: rgb(255, 255, 255);
+        border-radius: 15px;
+        border-color: rgb(153, 71, 230);
+        transition: 0.3s ease-in;
+    }
+
+    #player2:hover {
+        background-color: rgb(240, 225, 238);
+        color: #212529;
+    }
+
+    .reset {
+        background-color: rgb(251, 63, 63);
+        color: rgb(255, 255, 255);
+        border-radius: 15px;
+        border-color: rgb(251, 63, 63);
+        transition: 0.3s ease-in;
+    }
+
+    #reset:hover {
+        background-color: rgb(240, 225, 238);
+        color: #212529;
+    }
+
+    .winner {
+        color: green;
+        font-size: 250px;
+    }
+
+    .loser {
+        color: red;
+    }
+</style>
+
+</html>
